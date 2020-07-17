@@ -129,10 +129,7 @@ namespace ProfitOptimizer
                 Logger.LogEntry("A(z) "+ requests[i].Identifier + " azonosítójú rendelés optimalizálása és gyártási várólistához adása megtörtént." );
                 
             }
-            foreach (var item in requests)
-            {
-                Console.WriteLine(item.Priority);
-            }
+            
 
 
         }
