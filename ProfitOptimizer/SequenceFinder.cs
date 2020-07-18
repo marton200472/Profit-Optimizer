@@ -96,17 +96,17 @@ namespace ProfitOptimizer
                 if (requests[i].ProductType == ProductTypes.GYB)
                 {
                     requests[i].TimeToFinishCutting = (requests[i].Pieces - 1) * 5;
-                    requests[i].TimeToComplete = requests[i].TimeToFinishCutting + 50;
+                    requests[i].TimeToComplete = 50+requests[i].TimeToFinishCutting + (requests[i].Pieces % 2 == 0 ? 5 : 0);
                 }
                 else if (requests[i].ProductType == ProductTypes.SB)
                 {
                     requests[i].TimeToFinishCutting = (int)Math.Ceiling(7.5*(requests[i].Pieces-2)+6);
-                    requests[i].TimeToComplete = 63 + ((requests[i].Pieces - 1) / 2 * 15) + (requests[i].Pieces % 2 == 0 ? 5 : 0);
+                    requests[i].TimeToComplete = 63 + requests[i].TimeToFinishCutting + (requests[i].Pieces % 2 == 0 ? 5 : 0);
                 }
                 else if (requests[i].ProductType == ProductTypes.FB)
                 {
                     requests[i].TimeToFinishCutting = (requests[i].Pieces - 1) * 8;
-                    requests[i].TimeToComplete = 76+((requests[i].Pieces-1)/2*16)+(requests[i].Pieces%2==0?5:0);
+                    requests[i].TimeToComplete = 76+requests[0].TimeToFinishCutting+(requests[i].Pieces%2==0?5:0);
                 }
 
             }
@@ -126,7 +126,7 @@ namespace ProfitOptimizer
                         requests[j] = tmp;
                     }
                 }
-                Logger.LogEntry("A(z) "+ requests[i].Identifier + " azonosítójú rendelés optimalizálása és gyártási várólistához adása megtörtént." );
+                Logger.LogEntry("A(z) "+ requests[i].Identifier + " azonosítójú rendelés optimalizálása és gyártási várólistához adása megtörtént.");
                 
             }
             

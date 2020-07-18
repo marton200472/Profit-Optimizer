@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.Diagnostics;
 
 namespace ProfitOptimizer
 {
@@ -88,15 +89,25 @@ namespace ProfitOptimizer
                     }
                 }
             }
+            int[] workstationindexes = new int[input.Count()];
+            for (int i = 0; i < workstationindexes.Length; i++)
+            {
+                workstationindexes[i] = GetWorkstationIndex(AllData[i]);
+            }
             for (int i = 1; i < AllData.Length - 1; i++)
             {
                 for (int j = i + 1; j < AllData.Length; j++)
                 {
-                    if (AllData[i][0]==AllData[j][0]&&AllData[i][1].CompareTo(AllData[j][1]) > 0)
+                    
+                    if (AllData[i][0]==AllData[j][0]&&workstationindexes[i]>workstationindexes[j])
                     {
                         var tmp = AllData[i];
                         AllData[i] = AllData[j];
                         AllData[j] = tmp;
+
+                        int temp = workstationindexes[i];
+                        workstationindexes[i] = workstationindexes[j];
+                        workstationindexes[j] = temp;
                     }
                 }
             }
@@ -137,6 +148,27 @@ namespace ProfitOptimizer
             }
             
 
+        }
+
+        private static int GetWorkstationIndex(string[] row)
+        {
+            int workstationindex = 0;
+            for (int k = 0; k < Processor.WorkStations.Length; k++)
+            {
+                for (int l = 0; l < Processor.WorkStations[k].Length; l++)
+                {
+                    if (row[1] == Processor.WorkStations[k][l])
+                    {
+
+                        return workstationindex;
+                    }
+                    else
+                    {
+                        workstationindex++;
+                    }
+                }
+            }
+            return 0;
         }
 
     }
