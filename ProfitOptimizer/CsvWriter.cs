@@ -67,15 +67,41 @@ namespace ProfitOptimizer
             
             
         }
-        public static void WriteWorkToCsv(List<List<string>> input)
+        public static void WriteWorkToCsv(List<string[]> input)
         {
-            string[][] AllData = new string[input.Count() + 1][];
-            AllData[0] = new string[] { "Dátum", "Gép", "Kezdő időpont", "Záró időpont", "Megrendelésszám"};
+            string[][] AllData = new string[input.Count()][];
+            
+            string[] Header = new string[] { "Dátum;Gép;Kezdő időpont;Záró időpont;Megrendelésszám" };
             for (int i = 0; i < input.Count(); i++)
             {
-                AllData[i + 1] = input[i].ToArray();
+                AllData[i] = input[i].ToArray();
+            }
+            for (int i = 1; i < AllData.Length - 1; i++)
+            {
+                for (int j = i + 1; j < AllData.Length; j++)
+                {
+                    if (AllData[i][0].CompareTo(AllData[j][0])>0)
+                    {
+                        var tmp = AllData[i];
+                        AllData[i] = AllData[j];
+                        AllData[j] = tmp;
+                    }
+                }
+            }
+            for (int i = 1; i < AllData.Length - 1; i++)
+            {
+                for (int j = i + 1; j < AllData.Length; j++)
+                {
+                    if (AllData[i][0]==AllData[j][0]&&AllData[i][1].CompareTo(AllData[j][1]) > 0)
+                    {
+                        var tmp = AllData[i];
+                        AllData[i] = AllData[j];
+                        AllData[j] = tmp;
+                    }
+                }
             }
             string[] DataToBeWritten = new string[AllData.Length];
+            
             for (int i = 0; i < DataToBeWritten.Length; i++)
             {
                 DataToBeWritten[i] = "";
@@ -85,6 +111,8 @@ namespace ProfitOptimizer
                 }
                 DataToBeWritten[i] = DataToBeWritten[i].Substring(0, DataToBeWritten[i].Length - 1);
             }
+            
+            
             SaveFileDialog saveFileDialog = new SaveFileDialog() { AddExtension = true, DefaultExt = ".csv", Filter = "csv files(*.csv)|*.csv",Title="Munkarend mentése" }; 
             Console.WriteLine("A munkarend mentéséhez nyomd meg bármely gombot.");
             Console.ReadKey();
@@ -92,7 +120,8 @@ namespace ProfitOptimizer
             {
                 try
                 {
-                    File.WriteAllLines(saveFileDialog.FileName, DataToBeWritten, Encoding.UTF8);
+                    File.WriteAllLines(saveFileDialog.FileName, Header, Encoding.UTF8);
+                    File.AppendAllLines(saveFileDialog.FileName, DataToBeWritten, Encoding.UTF8);
                     Console.WriteLine("Munkarend mentve.");
                 }
                 catch (Exception)

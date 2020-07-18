@@ -14,6 +14,7 @@ namespace ProfitOptimizer
     {
         
         public static string[][] FirstOutput;
+        public static List<string[]> SecondOutput;
         [STAThread]
         static void Main(string[] args)
         {
