@@ -48,7 +48,6 @@
     <Compile Include="CsvLoader.cs" />
     <Compile Include="CsvWriter.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenceFinder.cs" />
