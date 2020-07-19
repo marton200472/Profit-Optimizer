@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlternativeProcessor.cs" />
     <Compile Include="CsvLoader.cs" />
     <Compile Include="CsvWriter.cs" />
     <Compile Include="Logger.cs" />

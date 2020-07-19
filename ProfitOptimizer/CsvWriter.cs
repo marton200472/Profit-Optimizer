@@ -153,11 +153,11 @@ namespace ProfitOptimizer
         private static int GetWorkstationIndex(string[] row)
         {
             int workstationindex = 0;
-            for (int k = 0; k < Processor.WorkStations.Length; k++)
+            for (int k = 0; k < AlternativeProcessor.WorkStations.Length; k++)
             {
-                for (int l = 0; l < Processor.WorkStations[k].Length; l++)
+                for (int l = 0; l < AlternativeProcessor.WorkStations[k].Length; l++)
                 {
-                    if (row[1] == Processor.WorkStations[k][l])
+                    if (row[1] == AlternativeProcessor.WorkStations[k][l])
                     {
 
                         return workstationindex;

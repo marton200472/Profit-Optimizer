@@ -41,7 +41,7 @@ namespace ProfitOptimizer
                 Program.Error();
 
             }
-            Processor.Process(requests.ToList());
+           
             
             
             
@@ -74,7 +74,7 @@ namespace ProfitOptimizer
                 Program.Error();
 
             }
-            Processor.Process(requests.ToList());
+            AlternativeProcessor.Process(requests);
 
 
 
